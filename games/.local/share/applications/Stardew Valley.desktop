@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Stardew Valley
+Comment=Nice game
+Categories=Games
+Exec=/usr/bin/steam steam://run/413150
+Terminal=False

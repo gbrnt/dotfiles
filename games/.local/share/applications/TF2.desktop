@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Team Fortress 2
+Comment=TF2
+Exec=/usr/bin/steam steam://run/440
+Terminal=False
