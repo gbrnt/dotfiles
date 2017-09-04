@@ -50,3 +50,7 @@ espconn() {
 
 # Make tmux use 256colour
 alias tmux="tmux -2"
+
+# Stow aliases
+alias dotfile="stow -t ~/"
+alias dotscript="stow -t /usr/local/bin/"
