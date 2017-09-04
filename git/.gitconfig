@@ -1,0 +1,5 @@
+[user]
+	name = George Bryant
+	email = git@gbryant.co.uk
+[push]
+	default = simple
