@@ -189,7 +189,8 @@ autocmd FileType python nnoremap <buffer> <Leader>r :exec "!python3" shellescape
 set background=dark
 
 " Use gui colours in the terminal
-if has("termguicolors")
+" Turn off when in tmux so colour scheme actually shows
+if has("termguicolors") && !exists('$TMUX')
     set termguicolors
 endif
 
