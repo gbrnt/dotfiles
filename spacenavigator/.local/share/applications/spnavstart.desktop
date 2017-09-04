@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Spacenav start
+Comment=Start the spacenav/spnav daemon
+Exec=sudo spacenavd -v -d
+Terminal=true
+Categories=Utility

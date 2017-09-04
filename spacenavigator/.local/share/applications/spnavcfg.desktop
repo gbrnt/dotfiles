@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Spnavcfg
+Comment=Configuration for spacenavd for Space Navigators
+Exec=spnavcfg
+Terminal=false
+Categories=Utility
