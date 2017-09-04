@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+swaylock -i /home/gbrnt/Pictures-local/bg-lock.png \
+    --insidecolor 262626 \
+    --insidevercolor 262626 \
+    --insidewrongcolor 262626 \
+    --ringcolor 262626 \
+    --ringvercolor ff4444 \
+    --ringwrongcolor ff0000 \
+    --keyhlcolor ff4444 \
+    --linecolor 00000000 \
+    --textcolor ffffff
