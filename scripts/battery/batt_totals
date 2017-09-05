@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """
-Calculate the overall battery percentage using each battery's capacity and
-current level
+Calculate the overall battery percentage and time using each battery's
+capacity and current level
 """
 
 import subprocess
@@ -36,6 +36,88 @@ def getLastFullCapacity(line):
     return int(line.split(" ")[-4])
 
 
+def getTimeRemaining(line):
+    """
+    Return the time remaining on the given battery, ignoring seconds
+    due to low accuracy and jitter.
+    Return None if not discharging
+    "Battery [...], 37%, 00:35:39 remaining" -> (00, 35)
+    "Battery 0: Unknown, 98%" -> None
+    """
+
+    # Not discharging
+    if not line.endswith("remaining"):
+        return None
+
+    time_strings = line.split(" ")[-2].split(":")
+    hours = int(time_strings[0])
+    minutes = int(time_strings[1])
+
+    return (hours, minutes)
+
+
+def sumTimes(times):
+    """
+    Return the sum of the given array of (H, M) tuples
+    """
+
+    # First sum the minutes to get any overflow
+    sum_minutes = sum((t[1] if t is not None else 0 for t in times))
+    minutes_overflow = sum_minutes // 60
+    minutes_remainder = sum_minutes % 60
+
+    sum_hours = sum((t[0] if t is not None else 0 for t in times))
+    sum_hours += minutes_overflow
+
+    return (sum_hours, sum_minutes)
+
+
+def timeToMin(time):
+    """
+    Return the number of minutes in the (H, M) tuple
+    """
+    return time[0]*60 + time[1]
+
+
+def getTotalTime(acpi_lines):
+    """
+    Return the estimated remaining time in "H:M" across all batteries
+    Return "chg" if no batteries discharging
+    """
+
+    charges = []
+    times = []
+
+    for status_line, capacity_line in pairwise(acpi_lines):
+        times.append(getTimeRemaining(status_line))
+        pct = getPercentage(status_line)
+        cap = getLastFullCapacity(capacity_line)
+        charges.append(pct*cap)
+
+    if not any(times):
+        # All times are None, so none discharging
+        return "chg"
+
+    elif not all(times):
+        # Some times are None, so estimate remaining times
+        # Index of first discharging battery
+        i = next(n[0] for n in enumerate(times) if n[1] is not None)
+        # Discharge rate in mAh/min
+        discharge_rate = charges[i] / timeToMin(times[i])
+
+        est_times = []
+        # Replace all None times with estimated remaining time
+        for i, t in enumerate(times):
+            if t is None:
+                est_time = charges[i] / discharge_rate
+            else:
+                est_times.append(t)
+
+    # Now times can be summed
+    sumT = sumTimes(times)
+    return "{}:{}".format(sumT[0], sumT[1])
+
+
 result = subprocess.run(['acpi', '-i'], stdout=subprocess.PIPE)
 acpi_lines = result.stdout.decode("utf-8").split("\n")[:-1]
 
@@ -51,8 +133,10 @@ for status_line, capacity_line in pairwise(acpi_lines):
 
 remaining_capacity = sum([p*c for p,c in zip(percentages, capacities)])
 remaining_percentage = remaining_capacity / sum(capacities)
+remaining_time_str = getTotalTime(acpi_lines)
 
 output_string = "+".join([str(int(p*100))+"%" for p in percentages])
 output_string += "={}%".format(int(remaining_percentage*100))
+output_string += " ({})".format(remaining_time_str)
 
 print(output_string)
