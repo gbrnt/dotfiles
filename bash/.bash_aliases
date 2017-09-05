@@ -1,7 +1,7 @@
 # Git aliases
 alias gsts='git status'
 alias gadd='git add -A'
-alias gcmt='git commit'
+alias gcmt='git commit -v'
 alias gpsh='git push'
 alias gpll='git pull'
 alias gmrg='git merge dev master'
