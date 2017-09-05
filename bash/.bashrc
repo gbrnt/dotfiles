@@ -19,3 +19,9 @@ export EDITOR="vim"
 export ALTERNATE_EDITOR=""
 #export EDITOR="emacsclient -t"
 #export VISUAL="emacsclient -c -a emacs -t"
+
+# Make sure terminal is 256color
+if [ "$TERM" = "xterm" ]
+then
+    export TERM="xterm-256color"
+fi
