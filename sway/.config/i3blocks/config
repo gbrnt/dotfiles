@@ -1,0 +1,19 @@
+interval=5
+color=#808080
+
+[volume]
+label=V:
+command=amixer get Master | grep -E -o '[0-9]{1,3}?%' | head -1
+signal=1
+
+[wifi]
+label=W:
+command=nmcli -f ACTIVE,SIGNAL dev wifi list | awk '$1=="yes" {print $2}'
+
+[battery]
+label=B:
+command=batt_totals
+interval=60
+
+[time]
+command=date +%a\ %d\ %B\ %H:%M
