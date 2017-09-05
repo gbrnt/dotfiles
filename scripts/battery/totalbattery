@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+
+"""
+Calculate the overall battery percentage using each battery's capacity and
+current level
+"""
+
+import subprocess
+
+
+def pairwise(iterable):
+    """
+    Iterate in pairs
+    s -> (s0, s1), (s2, s3), (s4, s5), ...
+    """
+    a = iter(iterable)
+    return zip(a, a)
+
+
+def getPercentage(line):
+    """
+    Return the value of the percentage from the end of the line
+    "Battery 0: Unknown, 99%" -> 0.99
+    "Battery 1: Discharging, 87%, 01:50:23 remaining" -> 0.87
+    """
+    percent_location = line.index("%")
+    percent_text = line[:percent_location].split(" ")[-1]
+    return int(percent_text) / 100
+
+
+def getLastFullCapacity(line):
+    """
+    Return the last full capacity of the battery
+    "Battery 0: [...] full capacity 3507 mAh = 97%" -> 3507
+    """
+    return int(line.split(" ")[-4])
+
+
+result = subprocess.run(['acpi', '-i'], stdout=subprocess.PIPE)
+acpi_lines = result.stdout.decode("utf-8").split("\n")[:-1]
+
+percentages = []
+capacities = []
+
+for status_line, capacity_line in pairwise(acpi_lines):
+    current_percentage = getPercentage(status_line)
+    last_full_capacity = getLastFullCapacity(capacity_line)
+
+    percentages.append(current_percentage)
+    capacities.append(last_full_capacity)
+
+remaining_capacity = sum([p*c for p,c in zip(percentages, capacities)])
+remaining_percentage = remaining_capacity / sum(capacities)
+
+print("{}%".format(int(remaining_percentage*100)))
