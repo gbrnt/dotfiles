@@ -53,4 +53,5 @@ alias tmux="tmux -2"
 
 # Stow aliases
 alias dotfile="stow -t ~/"
-alias dotscript="stow -t /usr/local/bin/"
+# /usr/local/bin requires root privileges
+alias dotscript="sudo stow -t /usr/local/bin/"
