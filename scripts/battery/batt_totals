@@ -61,15 +61,11 @@ def sumTimes(times):
     Return the sum of the given array of (H, M) tuples
     """
 
-    # First sum the minutes to get any overflow
-    sum_minutes = sum((t[1] if t is not None else 0 for t in times))
-    minutes_overflow = sum_minutes // 60
-    minutes_remainder = sum_minutes % 60
-
     sum_hours = sum((t[0] if t is not None else 0 for t in times))
-    sum_hours += minutes_overflow
+    sum_minutes = sum((t[1] if t is not None else 0 for t in times))
+    sum_minutes += sum_hours * 60
 
-    return (sum_hours, sum_minutes)
+    return minToTime(sum_minutes)
 
 
 def timeToMin(time):
@@ -77,6 +73,17 @@ def timeToMin(time):
     Return the number of minutes in the (H, M) tuple
     """
     return time[0]*60 + time[1]
+
+
+def minToTime(mins):
+    """
+    Return a (H, M) tuple equivalent to the given number of minutes
+    Hours and minutes are truncated to ints
+    """
+
+    hours = int(mins // 60)
+    minutes = int(mins % 60)
+    return (hours, minutes)
 
 
 def getTotalTime(acpi_lines):
@@ -110,12 +117,13 @@ def getTotalTime(acpi_lines):
         for i, t in enumerate(times):
             if t is None:
                 est_time = charges[i] / discharge_rate
+                est_times.append(minToTime(est_time))
             else:
                 est_times.append(t)
 
     # Now times can be summed
-    sumT = sumTimes(times)
-    return "{}:{}".format(sumT[0], sumT[1])
+    sumT = sumTimes(est_times)
+    return "{}:{:02d}".format(sumT[0], sumT[1])
 
 
 result = subprocess.run(['acpi', '-i'], stdout=subprocess.PIPE)
