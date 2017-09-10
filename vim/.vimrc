@@ -120,6 +120,8 @@ nnoremap <Leader>w :Goyo<Cr>
 
 " Convenience remaps {{{
 nnoremap G Gzz
+nnoremap <Leader>bp :bp<CR>
+nnoremap <Leader>bn :bn<CR>
 " }}}
 
 " Makemaps {{{
