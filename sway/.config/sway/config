@@ -231,3 +231,4 @@ include /etc/sway/config.d/*
 
 # Autostart programs
 exec dropbox
+exec redshift-wayland
