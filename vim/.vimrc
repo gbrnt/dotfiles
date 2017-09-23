@@ -192,9 +192,9 @@ set background=dark
 
 " Use gui colours in the terminal
 " Turn off when in tmux so colour scheme actually shows
-if has("termguicolors") && !exists('$TMUX')
-    set termguicolors
-endif
+"if has("termguicolors") && !exists('$TMUX')
+"    set termguicolors
+"endif
 
 set guifont=Source\ Code\ Pro\ Medium\ 10
 if has("gui_running")
