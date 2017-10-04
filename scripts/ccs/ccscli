@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+# Suppress wine errors and pass args to compiler
+ccs_compiler $@
+
+# Echo any .err files to terminal
+error=0
+shopt -s nullglob   # Do not enter loop if no .err files
+for i in *.err; do
+    less -FX "$i"
+    error=1
+done
+
+# If no errors echo "Build Success!"
+[ $error -eq 0 ] && echo "Build Success!"
