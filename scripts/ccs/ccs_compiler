@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+# Suppress wine errors and pass args to compiler
+WINEDEBUG=-all wine "${HOME}/.wine/drive_c/Program Files (x86)/PICC/CCSC.exe" $@
