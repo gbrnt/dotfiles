@@ -25,3 +25,8 @@ if [ "$TERM" = "xterm" ]
 then
     export TERM="xterm-256color"
 fi
+
+# Start tmux if not already in tmux and it's installed
+if command -v tmux>/dev/null; then
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+fi
