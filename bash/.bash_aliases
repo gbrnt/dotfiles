@@ -48,6 +48,9 @@ espconn() {
     picocom -b 115200 $1
 }
 
+# Connect to Arduino on default serial port
+alias arduino_serial='picocom -y n -b 9600 -f n -d 8 /dev/ttyACM0'
+
 # Make tmux use 256colour
 alias tmux="tmux -2"
 
