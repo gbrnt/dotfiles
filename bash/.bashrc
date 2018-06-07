@@ -27,6 +27,6 @@ then
 fi
 
 # Start tmux if not already in tmux and it's installed
-if command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
-fi
+#if command -v tmux>/dev/null; then
+#  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
+#fi
