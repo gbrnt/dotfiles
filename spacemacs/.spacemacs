@@ -351,6 +351,11 @@ you should place your code here."
 
   ;; Set relative line numbers
   (setq-default dotspacemacs-line-numbers 'relative)
+
+  ;; Enable org-indent-mode and visual-line-mode by default
+  (with-eval-after-load 'org
+    (setq org-startup-indented t) ; Enable `org-indent-mode' by default
+    (add-hook 'org-mode-hook #'visual-line-mode))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
