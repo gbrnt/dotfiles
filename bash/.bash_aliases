@@ -40,8 +40,8 @@ md () { mkdir -p "$@" && cd "$@"; }
 # Merge PDFs
 pdfmerge () { gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged.pdf "$@"; }
 
-# Get current temperature
-alias temp='sensors | egrep "temp.+crit"'
+# Get current temperature (Ryzen) [Broken]
+alias temp="sensors | grep CPUTIN"
 
 # Connect to ESP8266
 espconn() {
@@ -58,3 +58,6 @@ alias tmux="tmux -2"
 alias dotfile="stow -t ~/"
 # /usr/local/bin requires root privileges
 alias dotscript="sudo stow -t /usr/local/bin/"
+
+# Create hotspot (Ishmael specific)
+alias hotspot="sudo create_ap -m nat wlp3s0f0u9 enp30s0 Ishmael mwahahahaha"
