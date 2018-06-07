@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # Suppress wine errors and pass args to compiler
-ccs_compiler $@
+ccsc $@
 
 # Echo any .err files to terminal
 error=0
