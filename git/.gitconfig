@@ -3,3 +3,5 @@
 	email = git@gbryant.co.uk
 [push]
 	default = simple
+[init]
+	defaultBranch = main
