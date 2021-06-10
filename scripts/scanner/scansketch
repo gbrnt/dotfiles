@@ -1,6 +1,15 @@
 #!/bin/bash
 
-export SANE_DEFAULT_DEVICE="epjitsu:libusb:001:010"
+# Find a SANE device which uses the epjitsu driver and assume it's the right one
+epjitsu_device_name=$(scanimage --formatted-device-list "%d
+" | grep "epjitsu")
+if [ -z "$epjitsu_device_name" ]; then
+    echo "Scanner not detected. Exiting."
+    exit
+else
+    export SANE_DEFAULT_DEVICE="$epjitsu_device_name"
+    echo "Scanner found: $SANE_DEFAULT_DEVICE"
+fi
 
 # Output from scanimage -A:
 # $ scanimage -d epjitsu:libusb:001:010 -n -A
@@ -41,7 +50,7 @@ export SANE_DEFAULT_DEVICE="epjitsu:libusb:001:010"
 
 # Alias to quickly get state of sensors
 function all-outputs () {
-    scanimage -d epjitsu:libusb:001:010 -n -A --format='png'
+    scanimage -n -A --format='png'
 }
 
 # Get state of a given sensor in the scanner from the STDERR of all-outputs
@@ -59,19 +68,23 @@ function get-state() {
     fi
 }
 
-# Wait for scan button to be pressed
-echo "Press button on scanner to scan"
-scan_button_state=$( get-state --scan )
-while [ $scan_button_state = 0 ]
+# Allow you to scan multiple images, cancel with Ctrl-C
+while true
 do
-    sleep 0.5
+    # Wait for scan button to be pressed
+    echo "Press button on scanner to scan, or Ctrl-C to cancel"
     scan_button_state=$( get-state --scan )
+    while [ $scan_button_state = 0 ]
+    do
+        sleep 0.5
+        scan_button_state=$( get-state --scan )
+    done
+    echo "Starting scan"
+
+    # Create filename
+    timestamp=$(date -Iseconds)
+    filename="Scan ${timestamp}.png"
+
+    # Scan the image
+    scanimage --progress --mode Color --resolution 300 --page-width 210.01 --format png --output-file "${filename}"
 done
-echo "Starting scan"
-
-# Create filename
-timestamp=$(date -Iseconds)
-filename="Scan ${timestamp}.png"
-
-# Scan the image
-scanimage --progress --mode Color --resolution 300 --page-width 210.01 --format png --output-file "${filename}"
