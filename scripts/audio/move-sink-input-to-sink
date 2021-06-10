@@ -1,0 +1,18 @@
+#!/bin/bash
+
+SINK_INPUT=0
+SINK=0
+
+# Get index of Beat Saber"s sink input (ie audio output)
+pactl list sink-inputs | grep -E "(Sink Input #|application\.name)"
+read -p "Enter number of input: " SINK_INPUT
+
+# Get index of headset sink
+#pacmd list-sinks | grep -E "(index: |device\.product\.name|device\.profile\.description)"
+pactl list sinks | grep -E "(Sink #|Description: )"
+read -p "Enter the HDMI sink number: " SINK
+
+#echo Running command: pacmd move-sink-input $BS_SINK_INPUT $HEADSET_SINK
+#pacmd move-sink-input $BS_SINK_INPUT $HEADSET_SINK
+echo Running command: pactl move-sink-input $SINK_INPUT $SINK
+pactl move-sink-input $SINK_INPUT $SINK
