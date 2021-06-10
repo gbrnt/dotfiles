@@ -1,0 +1,77 @@
+#!/bin/bash
+
+export SANE_DEFAULT_DEVICE="epjitsu:libusb:001:010"
+
+# Output from scanimage -A:
+# $ scanimage -d epjitsu:libusb:001:010 -n -A
+# All options specific to device `epjitsu:libusb:001:010':
+#   Scan Mode:
+#     --mode Lineart|Gray|Color [Lineart]
+#         Selects the scan mode (e.g., lineart, monochrome, or color).
+#     --resolution 50..600dpi (in steps of 1) [300]
+#         Sets the resolution of the scanned image.
+#   Geometry:
+#     -t 0..289.353mm (in steps of 0.0211639) [0]
+#         Top-left y position of scan area.
+#     --page-width 2.70898..219.428mm (in steps of 0.0211639) [215.872]
+#         Specifies the width of the media.  Required for automatic centering of
+#         sheet-fed scans.
+#     --page-height 0..450.707mm (in steps of 0.0211639) [292.062]
+#         Specifies the height of the media, 0 will auto-detect.
+#   Enhancement:
+#     --brightness -127..127 (in steps of 1) [0]
+#         Controls the brightness of the acquired image.
+#     --contrast -127..127 (in steps of 1) [0]
+#         Controls the contrast of the acquired image.
+#     --threshold 0..255 (in steps of 1) [120]
+#         Select minimum-brightness to get a white point
+#     --threshold-curve 0..127 (in steps of 1) [55]
+#         Dynamic threshold curve, from light to dark, normally 50-65
+#   Sensors:
+#     --scan[=(yes|no)] [no] [hardware]
+#         Scan button
+#     --page-loaded[=(yes|no)] [yes] [hardware]
+#         Page loaded
+#     --top-edge[=(yes|no)] [no] [hardware]
+#         Paper is pulled partly into adf
+#     --cover-open[=(yes|no)] [no] [hardware]
+#         Cover open
+#     --power-save[=(yes|no)] [yes] [hardware]
+#         Scanner in power saving mode
+
+# Alias to quickly get state of sensors
+function all-outputs () {
+    scanimage -d epjitsu:libusb:001:010 -n -A --format='png'
+}
+
+# Get state of a given sensor in the scanner from the STDERR of all-outputs
+# e.g. "get-state --scan" or "get-state --cover-open"
+# In the output:
+#     --scan[=(yes|no)] [no] [hardware]
+#                        ^ This is it (it will become yes once pressed but be reset by the check)
+function get-state() {
+    sensor_line=$(all-outputs |& grep -- $1)
+    sensor_state=$(echo $sensor_line | cut -d "[" -f3 | cut -d "]" -f1)
+    if [ "$sensor_state" = "yes" ]; then
+        echo 1
+    else
+        echo 0
+    fi
+}
+
+# Wait for scan button to be pressed
+echo "Press button on scanner to scan"
+scan_button_state=$( get-state --scan )
+while [ $scan_button_state = 0 ]
+do
+    sleep 0.5
+    scan_button_state=$( get-state --scan )
+done
+echo "Starting scan"
+
+# Create filename
+timestamp=$(date -Iseconds)
+filename="Scan ${timestamp}.png"
+
+# Scan the image
+scanimage --progress --mode Color --resolution 300 --page-width 210.01 --format png --output-file "${filename}"
