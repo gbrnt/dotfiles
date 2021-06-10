@@ -131,11 +131,18 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
+<<<<<<< HEAD
    ;;dotspacemacs-themes '(monokai
    ;;dotspacemacs-themes '(tangotango
    ;;                    monokai
    ;;                    spacemacs-dark
    dotspacemacs-themes '(spacemacs-dark
+=======
+   dotspacemacs-themes '(monokai
+                         tangotango
+                         monokai
+                         spacemacs-dark
+>>>>>>> e14730751f93536c7cc3246ad4f0ae650b2b0d1d
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
