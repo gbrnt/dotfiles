@@ -30,3 +30,6 @@ fi
 #if command -v tmux>/dev/null; then
 #  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 #fi
+
+# Add ~/.local/bin to PATH
+export PATH=~/.local/bin:"$PATH"
