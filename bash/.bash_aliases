@@ -61,3 +61,6 @@ alias dotscript="sudo stow -t /usr/local/bin/"
 
 # Create hotspot (Ishmael specific)
 alias hotspot="sudo create_ap -m nat wlp3s0f0u9 enp30s0 Ishmael mwahahahaha"
+
+# Reboot into UEFI setup
+alias reboot-uefi="systemctl reboot --firmware-setup"
