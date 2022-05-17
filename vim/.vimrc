@@ -187,6 +187,11 @@ autocmd BufRead *.py inoremap # X<c-h>#
 autocmd FileType python nnoremap <buffer> <Leader>r :exec "!python3" shellescape(@%, 1)<CR>
 " }}}
 
+" Arduino stuff {{{
+" Set tab size to 2
+autocmd FileType arduino setlocal tabstop=2 softtabstop=2 shiftwidth=2 foldmethod=syntax
+" }}}
+
 " Theme stuff {{{
 set background=dark
 
