@@ -1,5 +1,16 @@
 # Read `man 5 sway` for a complete reference.
 
+### Dependencies
+# These are dependencies for my setup specifically
+# swaybg - for background setting
+# bemenu-wayland - for application launching
+# swaylock - for screen locking
+# lock - located in dotfiles/scripts/swaylock
+# pamixer - for volume control
+# playerctl - for playback controls
+# i3blocks - for status bar
+# gammastep - for orangey night mode
+
 ### Variables
 #
 # Logo key mod4, Alt key mod1
