@@ -143,8 +143,13 @@ remaining_capacity = sum([p*c for p,c in zip(percentages, capacities)])
 remaining_percentage = remaining_capacity / sum(capacities)
 remaining_time_str = getTotalTime(acpi_lines)
 
-output_string = "+".join([str(int(p*100))+"%" for p in percentages])
-output_string += "={}%".format(int(remaining_percentage*100))
-output_string += " ({})".format(remaining_time_str)
+# Special case for only one battery to keep it shorter
+if len(capacities) == 1:
+    output_string = f"{int(remaining_percentage*100)}%"
+    output_string += f" ({remaining_time_str})"
+else:
+    output_string = "+".join([str(int(p*100))+"%" for p in percentages])
+    output_string += "={}%".format(int(remaining_percentage*100))
+    output_string += " ({})".format(remaining_time_str)
 
 print(output_string)
