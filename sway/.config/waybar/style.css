@@ -1,0 +1,105 @@
+/*
+ *  George's waybar styling
+ */
+
+* {
+    background: #222;
+    color: #66CC33;
+}
+
+#waybar {
+    font-family: "Source Sans Pro";
+}
+
+/* Animation for battery warning */
+@keyframes blink-warning {
+    70% {
+        color: white;
+    }
+
+    to {
+        color: white;
+        background: orange;
+    }
+}
+@keyframes blink-critical {
+    70% {
+      color: white;
+    }
+
+    to {
+        color: white;
+        background: red;
+    }
+}
+
+/* All modules */
+#battery,
+#clock,
+#cpu,
+#custom-keyboard-layout,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#temperature,
+#tray {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+#battery {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#clock {
+    font-weight: bold;
+}
+
+#window {
+    padding-left: 10px;
+}
+
+#battery.warning {
+    color: orange;
+}
+
+#battery.critical {
+    color: red;
+}
+
+#battery.warning.discharging {
+    animation-name: blink-warning;
+    animation-duration: 3s;
+}
+
+#battery.critical.discharging {
+    animation-name: blink-critical;
+    animation-duration: 3s;
+}
+
+#workspaces button {
+    /*
+    all: unset;
+    padding: 0 6px;
+    */
+    background: #222;
+    color: #336600;
+}
+
+#workspaces button.focused {
+    background: #336600;
+    color: #222;
+}
+
+#workspaces button.urgent {
+    /*border-color: #66CC33;*/
+    background: #222;
+    color: #66CC33;
+}
+
+#workspaces button:hover {
+    background: #FFF;
+}

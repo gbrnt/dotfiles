@@ -11,6 +11,9 @@
 # i3blocks - for status bar
 # gammastep - for orangey night mode
 # wl-clipboard - clipboard manager
+# mako - notifications
+# grim + slurp - screenshots
+# xdg-desktop-portal + xdg-desktop-portal-wlr
 
 ### Variables
 #
@@ -22,10 +25,11 @@ set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-set $term konsole
-# Your preferred application launcher
+# Preferred applications
 set $menu bemenu-run
+set $term alacritty
+set $browser firefox
+set $filemanager thunar
 
 ### Output configuration
 # You can get the names of your outputs by running: swaymsg -t get_outputs
@@ -58,10 +62,10 @@ include ./boring-keybindings.conf
     bindsym $mod2+l exec lock
 
     # start browser
-    bindsym $mod2+Shift+f exec firefox
+    bindsym $mod2+Shift+f exec $browser
 
     # start file browser
-    bindsym $mod2+f exec dolphin
+    bindsym $mod2+f exec $filemanager
 
     # Volume + media keys
     bindsym XF86AudioRaiseVolume exec pamixer -i 5; exec pkill -RTMIN+1 i3blocks
@@ -75,7 +79,13 @@ include ./boring-keybindings.conf
     bindsym XF86AudioStop exec playerctl stop
 
 ### Status Bar:
-include ./bar.config
+#include ./bar.config
+exec waybar
+
+### Screenshots
+bindsym $mod2+Shift+S exec grim -g "$(slurp)" - | wl-copy
+bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
+bindsym Print exec grim -g "$(slurp)"
 
 ### Appearance
 # <colorclass> <border> <background> <text> <indicator> <child_border>
@@ -91,5 +101,8 @@ include /etc/sway/config.d/*
 #exec nextcloud-client
 #exec dropbox
 #exec redshift-wayland
+# Night mode
 exec gammastep
 exec emacs --daemon
+# Notifications
+exec mako
