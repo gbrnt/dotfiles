@@ -62,17 +62,17 @@ input 20547:21570:Ploopy_Corporation_Trackball_Mouse {
 include ./boring-keybindings.conf
 
     # lock computer
-    bindsym $Super+l exec lock
+    bindsym $Super+Alt+l exec lock
 
     # start browser
-    bindsym $Super+Shift+f exec $browser
+    bindsym $Super+b exec $browser
 
     # start file browser
     bindsym $Super+f exec $filemanager
 
     # Application/command launcher
-    bindsym $Alt+d exec $appmenu
-    bindsym $Alt+c exec $commandmenu
+    bindsym $Super+d exec $appmenu
+    bindsym $Super+c exec $commandmenu
 
     # Volume + media keys
     bindsym XF86AudioRaiseVolume exec pamixer -i 5; exec pkill -RTMIN+1 i3blocks
@@ -85,14 +85,14 @@ include ./boring-keybindings.conf
     bindsym XF86AudioPrev exec playerctl previous
     bindsym XF86AudioStop exec playerctl stop
 
+    ### Screenshots
+    bindsym $Super+Shift+S exec grim -g "$(slurp)" - | wl-copy
+    bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
+    bindsym Print exec grim -g "$(slurp)"
+
 ### Status Bar:
 #include ./bar.config
 exec waybar
-
-### Screenshots
-bindsym $Super+Shift+S exec grim -g "$(slurp)" - | wl-copy
-bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
-bindsym Print exec grim -g "$(slurp)"
 
 ### Appearance
 # <colorclass> <border> <background> <text> <indicator> <child_border>
