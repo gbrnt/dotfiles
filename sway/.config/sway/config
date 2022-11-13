@@ -18,8 +18,10 @@
 ### Variables
 #
 # Logo key mod4, Alt key mod1
-set $mod Mod1
-set $mod2 Mod4
+set $Alt Mod1
+set $Super Mod4
+set $mod $Alt
+set $mod2 $Super
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -60,17 +62,17 @@ input 20547:21570:Ploopy_Corporation_Trackball_Mouse {
 include ./boring-keybindings.conf
 
     # lock computer
-    bindsym $mod2+l exec lock
+    bindsym $Super+l exec lock
 
     # start browser
-    bindsym $mod2+Shift+f exec $browser
+    bindsym $Super+Shift+f exec $browser
 
     # start file browser
-    bindsym $mod2+f exec $filemanager
+    bindsym $Super+f exec $filemanager
 
     # Application/command launcher
-    bindsym $mod+d exec $appmenu
-    bindsym $mod+c exec $commandmenu
+    bindsym $Alt+d exec $appmenu
+    bindsym $Alt+c exec $commandmenu
 
     # Volume + media keys
     bindsym XF86AudioRaiseVolume exec pamixer -i 5; exec pkill -RTMIN+1 i3blocks
@@ -88,7 +90,7 @@ include ./boring-keybindings.conf
 exec waybar
 
 ### Screenshots
-bindsym $mod2+Shift+S exec grim -g "$(slurp)" - | wl-copy
+bindsym $Super+Shift+S exec grim -g "$(slurp)" - | wl-copy
 bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
 bindsym Print exec grim -g "$(slurp)"
 
