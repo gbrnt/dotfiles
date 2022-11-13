@@ -3,7 +3,7 @@
 ### Dependencies
 # These are dependencies for my setup specifically
 # swaybg - for background setting
-# bemenu-wayland - for application launching
+# bemenu-wayland + j4-dmenu-desktop - for application launching
 # swaylock - for screen locking
 # lock - located in dotfiles/scripts/swaylock
 # pamixer - for volume control
@@ -26,7 +26,8 @@ set $down j
 set $up k
 set $right l
 # Preferred applications
-set $menu bemenu-run
+set $commandmenu bemenu-run
+set $appmenu j4-dmenu-desktop --dmenu="bemenu -i" --term="alacritty"
 set $term alacritty
 set $browser firefox
 set $filemanager thunar
@@ -66,6 +67,10 @@ include ./boring-keybindings.conf
 
     # start file browser
     bindsym $mod2+f exec $filemanager
+
+    # Application/command launcher
+    bindsym $mod+d exec $appmenu
+    bindsym $mod+c exec $commandmenu
 
     # Volume + media keys
     bindsym XF86AudioRaiseVolume exec pamixer -i 5; exec pkill -RTMIN+1 i3blocks
