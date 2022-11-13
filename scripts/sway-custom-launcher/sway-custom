@@ -2,5 +2,5 @@
 
 export XKB_DEFAULT_LAYOUT=gb
 export XKB_DEFAULT_OPTIONS=ctrl:nocaps
-#/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
+/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
 sway

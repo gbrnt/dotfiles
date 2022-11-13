@@ -103,11 +103,10 @@ font Source Sans Pro Regular 11
 include /etc/sway/config.d/*
 
 # Autostart programs
-#exec nextcloud-client
 #exec dropbox
-#exec redshift-wayland
 # Night mode
 exec gammastep
 exec emacs --daemon
+exec nextcloud
 # Notifications
 exec mako
