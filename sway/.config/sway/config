@@ -109,6 +109,6 @@ include /etc/sway/config.d/*
 # Night mode
 exec gammastep
 exec emacs --daemon
-exec nextcloud
+exec nextcloud --background
 # Notifications
 exec mako
