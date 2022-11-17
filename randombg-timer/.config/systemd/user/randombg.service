@@ -1,0 +1,6 @@
+[Unit]
+Description=Set a random Sway background from Nextcloud
+
+[Service]
+ExecStart=/usr/local/bin/randombg
+Type=oneshot

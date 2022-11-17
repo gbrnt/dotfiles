@@ -1,0 +1,10 @@
+# Put in place with `dotfile` and enable with `systemctl enable --user randombg.timer`
+[Unit]
+Description=Change to a random background every 5 minutes
+
+[Timer]
+OnBootSec=5m
+OnUnitActiveSec=5m
+
+[Install]
+WantedBy=timers.target
