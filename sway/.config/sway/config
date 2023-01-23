@@ -39,8 +39,8 @@ set $filemanager thunar
 output * bg /home/gbrnt/Pictures/bg.jpg fill
 
 # Monitor positions for current Thinkpad setup
-output HDMI-A-1 pos 0 0
-output VGA-1 pos 1920 0
+output DP-2 pos 0 0
+output DP-3 pos 1920 0
 
 ### Input configuration
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -55,6 +55,10 @@ input type:keyboard {
 input 20547:21570:Ploopy_Corporation_Trackball_Mouse {
     accel_profile adaptive
     pointer_accel -0.3
+}
+# Map graphics tablet to right hand monitor
+input 9580:109:HID_256c:006d {
+    map_to_region 1920 0 1920 1200
 }
 
 ### Key bindings
