@@ -2,5 +2,6 @@
 
 export XKB_DEFAULT_LAYOUT=gb
 export XKB_DEFAULT_OPTIONS=ctrl:nocaps
+export XDG_CURRENT_DESKTOP=sway
 /usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh
 sway
