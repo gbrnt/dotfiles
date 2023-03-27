@@ -1,0 +1,6 @@
+#!/usr/bin/env python3
+import glob
+import random
+source = "/storage/Nextcloud/Pictures/BestOf/*/*/*.jpg"
+wallpapers = glob.glob(source)
+print(random.choice(wallpapers))

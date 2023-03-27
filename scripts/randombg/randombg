@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# Folder where wallpapers are stored
-wallpaper_path="/storage/Nextcloud/Pictures/BestOf"
-wallpaper=$(find $wallpaper_path -mindepth 1 -type f \( -iname \*.jpg -o -iname \*.png \) | shuf -n 1)
-swaymsg "output '*' bg ${wallpaper} fit"
