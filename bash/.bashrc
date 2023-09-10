@@ -31,5 +31,5 @@ fi
 #  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux
 #fi
 
-# Add ~/.local/bin to PATH
-export PATH=~/.local/bin:"$PATH"
+# Add ~/.local/bin and ~/.config/emacs/bin to PATH
+export PATH=~/.local/bin:~/.config/emacs/bin:"$PATH"
