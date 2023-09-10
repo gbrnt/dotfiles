@@ -109,6 +109,20 @@ include ./boring-keybindings.conf
     bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
     bindsym Print exec grim -g "$(slurp)"
 
+    # Floating calculator
+    for_window [title="galculator"] {
+        move scratchpad
+        resize set 400 500
+        scratchpad show
+    }
+
+    # Floating Keepass
+    for_window [app_id="org.keepassxc.KeePassXC"] {
+        move scratchpad
+        resize set 400 500
+        scratchpad show
+    }
+
 # Tell dbus what WAYLAND_DISPLAY to connect to
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
