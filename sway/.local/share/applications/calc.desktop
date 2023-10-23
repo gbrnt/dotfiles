@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=Calc
+Comment=Launch preferred calculator program
+Exec=galculator
+Icon=galculator
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupNotify=true
