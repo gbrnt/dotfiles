@@ -119,7 +119,7 @@ include ./boring-keybindings.conf
     # Floating Keepass
     for_window [app_id="org.keepassxc.KeePassXC"] {
         move scratchpad
-        resize set 400 500
+        resize set 1200 720
         scratchpad show
     }
 
