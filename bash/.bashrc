@@ -33,3 +33,6 @@ fi
 
 # Add ~/.local/bin and ~/.config/emacs/bin to PATH
 export PATH=~/.local/bin:~/.config/emacs/bin:"$PATH"
+
+# Set path to SSH agent so openssh can find it
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
