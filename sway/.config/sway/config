@@ -58,7 +58,7 @@ input 20547:21570:Ploopy_Corporation_Trackball_Mouse {
     pointer_accel -0.4
 }
 # Map Huion H640P graphics tablet to monitor
-input 9580:109:HID_256c:006d {
+input 9580:109:HID_256c:006d_Pen {
     # Right monitor
     map_to_region 1920 0 1920 1200
     # Laptop screen

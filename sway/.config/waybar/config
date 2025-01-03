@@ -8,7 +8,7 @@
     "modules-left": ["sway/workspaces", "sway/window", "sway/mode", "sway/scratchpad", "custom/media"],
     "modules-center": ["clock"],
     //"modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "sway/language", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["tray", "pulseaudio", "network", "battery"],
+    "modules-right": ["tray", "pulseaudio", "network", "temperature", "battery"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -98,7 +98,7 @@
         "format": "{}% "
     },
     "temperature": {
-        // "thermal-zone": 2,
+        "thermal-zone": 0,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",

@@ -17,3 +17,8 @@ interval=60
 
 [time]
 command=date +%a\ %d\ %B\ %H:%M
+
+[temperature]
+instance=Core
+label=T
+interval=5
