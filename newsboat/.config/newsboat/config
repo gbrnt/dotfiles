@@ -1,0 +1,42 @@
+# Newsboat config to connect to Nextcloud News on cloud.gbryant.co.uk
+
+# Connect to Nextcloud --------------------------------------------------------
+urls-source "ocnews"
+ocnews-url ""
+ocnews-login ""
+ocnews-password ""
+
+# Get articles on startup?
+prepopulate-query-feeds yes
+
+# Display ---------------------------------------------------------------------
+#show-read-feeds no
+#feed-sort-order unreadarticlecount-asc
+
+# Navigation 1-----------------------------------------------------------------
+browser "url-handler.py"
+
+# Vim-like keybindings in most places
+bind-key h quit articlelist
+bind-key h quit article
+bind-key h quit tagselection
+bind-key h quit feedlist
+bind-key j down feedlist
+bind-key j down tagselection
+bind-key j next articlelist
+bind-key j down article
+bind-key J next-feed articlelist
+bind-key k up feedlist
+bind-key k prev articlelist
+bind-key k up tagselection
+bind-key K prev-feed articlelist
+bind-key k up article
+bind-key l open articlelist
+bind-key l open feedlist
+bind-key l open tagselection
+
+bind-key G end
+bind-key g home
+
+bind-key d pagedown
+bind-key u pageup
