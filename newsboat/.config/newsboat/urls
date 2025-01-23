@@ -1,0 +1,4 @@
+"query:Unread:unread = \"yes\""
+"query:Youtube:tags # \"Youtube\""
+"query:Blogs:tags # \"Blogs\""
+"query:News:tags # \"News\""
