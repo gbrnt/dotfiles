@@ -104,6 +104,13 @@ include ./boring-keybindings.conf
     bindsym XF86AudioPrev exec playerctl previous
     bindsym XF86AudioStop exec playerctl stop
 
+    # Enabling and disabling laptop display
+    # Disable when laptop closed, enable when open, also bind Fn+F7 to disable it
+    # That's so you can open the laptop but keep the display with no workspaces on it
+    bindsym XF86Display output LVDS-1 disable
+    bindswitch lid:on output LVDS-1 disable
+    bindswitch lid:off output LVDS-1 enable
+
     ### Screenshots
     bindsym $Super+Shift+S exec grim -g "$(slurp)" - | wl-copy
     bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy
